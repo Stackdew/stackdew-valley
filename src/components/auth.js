@@ -1,20 +1,9 @@
 import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth'
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-} from 'firebase/firestore'
+  createUser,
+  loginUser,
+} from '../firebase/firebase-queries'
 
-import { auth, db } from '../firebase/firebase-init'
-import { createUserData } from '../firebase/firebase-queries'
-
-export function setupAuthModal() {
+export const setupAuthModal = () => {
   const modal = `
         <div id="auth-modal" class="modal">
             <div class="modal-content">
@@ -76,28 +65,17 @@ export function setupAuthModal() {
 
   loginForm.addEventListener('submit', async function (e) {
     e.preventDefault()
+
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
 
     try {
-      const userQuery = query(
-        collection(db, 'users'),
-        where('username', '==', username)
-      )
-      const userSnapshot = await getDocs(userQuery)
+      await loginUser(username, password)
 
-      if (userSnapshot.empty) {
-        throw new Error('User not found!')
-      }
-
-      const userDoc = userSnapshot.docs[0].data()
-      const email = userDoc.email
-
-      await signInWithEmailAndPassword(auth, email, password)
       alert('Logged in successfully!')
       modalElement.style.display = 'none'
     } catch (error) {
-      alert(`Login failed: ${error.message}`)
+      alert(error.message)
     }
   })
 
@@ -113,44 +91,7 @@ export function setupAuthModal() {
     }
 
     try {
-      const email = `${username}@example.com`
-
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      )
-      const user = userCredential.user
-
-      const userRef = doc(db, 'users', user.uid)
-        await setDoc(
-          userRef,
-          {
-            username: username,
-            email: user.email,
-            inventory: [
-              { slot0: { item: '' } },
-              { slot1: { item: '' } },
-              { slot2: { item: '' } },
-              { slot3: { item: '' } },
-              { slot4: { item: '' } },
-            ],
-            created_at: new Date(),
-            last_login_at: new Date(),
-            user_id: user.uid,
-            position: {
-              x: 0,
-              y: 0,
-              map: 'StartZone',
-            },
-          },
-          { merge: true }
-        )
-
-      // await setDoc(doc(db, 'users', user.uid), {
-      //   username: username,
-      //   email: email,
-      // })
+      await createUser(username, password, confirmPassword)
 
       alert('Signed up successfully!')
       modalElement.style.display = 'none'
