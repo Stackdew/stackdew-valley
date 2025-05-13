@@ -1,0 +1,178 @@
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #222;
+  color: #333;
+}
+
+#stackdew-valley {
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+#stackdew-valley canvas {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  background-color: #000;
+  border: 2px solid #333;
+}
+
+
+/* Navbar styling */
+@media (max-width: 600px) {
+  nav.navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav.navbar ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-right {
+    align-self: flex-end;
+  }
+}
+
+nav.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c3e50;
+  padding: 10px 20px;
+  color: white;
+}
+
+nav.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+nav.navbar li {
+  display: flex;
+  align-items: center;
+}
+
+nav.navbar a, 
+nav.navbar button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+nav.navbar button:hover,
+nav.navbar a:hover {
+  text-decoration: underline;
+}
+
+nav.navbar .navbar-left {
+  justify-content: flex-start;
+}
+
+nav.navbar .navbar-right {
+  justify-content: flex-end;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+p span {
+  color: #4CAF50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 14px;
+}
+
+body {
+  padding-top: 20px;
+}
