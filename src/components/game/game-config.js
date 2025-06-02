@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 
 // import GameScene from './scenes/game-scene'
-
+import TitleScene from './scenes/titleScene.js'
+import LoreScene from './scenes/loreScene.js'
 import overworldScene from './scenes/overworld.js';
 import preloadScene from './scenes/preloadScene.js';
 import firstFloor from './scenes/firstFloor.js';
@@ -23,6 +24,8 @@ const config = {
   backgroundColor: '#2d2d2d',
   parent: 'stackdew-valley',
   scene: [
+    TitleScene,
+    LoreScene,
     firstFloor,
     farmScene,
     overworldScene,

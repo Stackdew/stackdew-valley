@@ -1,15 +1,14 @@
 import './style.css'
+// import '../test.js'
 
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
 
+import { auth } from './firebase/firebase-init'
+import { handleAuthStateChange } from './firebase/firebase-queries'
+import { initThemeSwitcher } from './components/mode-switch'
 import { setupAuthModal } from './components/auth'
-import { auth, db } from './firebase/firebase-init'
-import {
-  launchGame,
-  destroyGame,
-  getGameInstance,
-} from './components/game/game-config'
+import { setupAboutModal } from './components/about'
+import { setupInstructionsModal } from './components/instructions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.createElement('nav')
@@ -18,11 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     <ul class="navbar-left">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#instructions">Instructions</a></li>
   </ul>
   <ul class="navbar-right">
       <li><span id="user-display" style="color:white;"></span></li>
       <li><button id="login-btn">Login</button></li>
       <li><button id="logout-btn" style="display: none;">Logout</button></li>
+      <li><button id="theme-toggle" aria-label="Toggle dark mode">🌞</button></li>
   </ul>
     `
 
@@ -30,37 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
   app.appendChild(navbar)
 
   setupAuthModal()
+  setupAboutModal()
+  setupInstructionsModal()
 
-  onAuthStateChanged(auth, async (user) => {
-    const userDisplay = document.getElementById('user-display')
-    const loginBtn = document.getElementById('login-btn')
-    const logoutBtn = document.getElementById('logout-btn')
-
-    if (user) {
-      try {
-        const userDocRef = doc(db, 'users', user.uid)
-        const userDocSnap = await getDoc(userDocRef)
-
-        if (userDocSnap.exists()) {
-          const userData = userDocSnap.data()
-          userDisplay.textContent = `Logged in as: ${userData.username}`
-        }
-
-        loginBtn.style.display = 'none'
-        logoutBtn.style.display = 'inline-block'
-        if (!getGameInstance()) {
-          launchGame()
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error)
-      }
-    } else {
-      userDisplay.textContent = ''
-      loginBtn.style.display = 'inline-block'
-      logoutBtn.style.display = 'none'
-      destroyGame()
-    }
+  onAuthStateChanged(auth, (user) => {
+    handleAuthStateChange(user)
   })
+
+  initThemeSwitcher()
 })
 
 document.addEventListener('click', async (e) => {
