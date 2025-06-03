@@ -14,6 +14,7 @@ import pauseScene from "./scenes/pauseScene.js";
 import DevlingSelection from "./scenes/devlingSelection.js";
 import TrumpBattle from "./scenes/trumpScene.js";
 import minigameSnake from "./scenes/minigameSnake.js";
+import dungeonScene from "./scenes/dungeonScene.js";
 
 let gameInstance = null;
 
@@ -29,6 +30,7 @@ const config = {
     firstFloor,
     minigameSnake,
     farmScene,
+    dungeonScene,
     overworldScene,
     preloadScene,
     secondFloor,
