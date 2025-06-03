@@ -65,6 +65,7 @@ export default class TrumpBattle extends Phaser.Scene {
     //initialise dialogue manager
     this.dialogue = new DialogueManager(this);
     this.isDialogueRunning = false;
+    this.input.keyboard.enabled = true;
 
     this.anims.create({
       key: "flame",
