@@ -1,50 +1,113 @@
-
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
-
-* {
+/* ==============================
+   Reset & Base
+================================= */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --background: #fefae0;
+  --text: #333;
+  --primary: #7ca982;
+  --accent: #ffb703;
+  --light: #ffffff;
+  --white: #ffffff;
+  --hover-accent: #ff9900;
+}
+
+/* ==============================
+   Body & Global
+================================= */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #222;
-  color: #333;
-}
-
-#stackdew-valley {
-  width: 100%;
-  height: 100vh;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
   position: relative;
+  min-height: 100vh;
+  padding-top: 50px;
+
+  /* background-image: url('/background.jpeg'); */
+  background-size:cover;
+  background-position:center;
+  background-repeat: no-repeat;
 }
 
+/* ==============================
+   Game Canvas Area
+================================= */
 #stackdew-valley canvas {
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  background-color: #000;
-  border: 2px solid #333;
+  border: 3px solid var(--primary);
+  border-radius: 12px;
 }
 
+/* ==============================
+   Navbar
+================================= */
+nav.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 12px 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
 
-/* Navbar styling */
+nav.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+nav.navbar li {
+  display: flex;
+  align-items: center;
+}
+
+nav.navbar a,
+nav.navbar button {
+  color: var(--white);
+  font-size: 16px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+nav.navbar a:hover,
+nav.navbar button:hover {
+  color: var(--accent);
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+#theme-toggle {
+  font-size: 18px;
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.2);
+}
+
 @media (max-width: 600px) {
   nav.navbar {
     flex-direction: column;
@@ -54,6 +117,7 @@ body {
   nav.navbar ul {
     flex-direction: column;
     width: 100%;
+    margin-top: 10px;
   }
 
   .navbar-right {
@@ -61,70 +125,29 @@ body {
   }
 }
 
-nav.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2c3e50;
-  padding: 10px 20px;
-  color: white;
-}
-
-nav.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-  margin: 0;
-  padding: 0;
-}
-
-nav.navbar li {
-  display: flex;
-  align-items: center;
-}
-
-nav.navbar a, 
-nav.navbar button {
-  color: white;
-  text-decoration: none;
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-nav.navbar button:hover,
-nav.navbar a:hover {
-  text-decoration: underline;
-}
-
-nav.navbar .navbar-left {
-  justify-content: flex-start;
-}
-
-nav.navbar .navbar-right {
-  justify-content: flex-end;
-}
-
-
+/* ==============================
+   Modal
+================================= */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 500;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
-  background-color: white;
-  margin: 15% auto;
-  padding: 20px;
-  width: 300px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  background-color: var(--light);
+  margin: 10% auto;
+  padding: 30px;
+  width: 320px;
+  max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .close-btn {
@@ -132,47 +155,372 @@ nav.navbar .navbar-right {
   top: 10px;
   right: 20px;
   font-size: 28px;
-  color: #aaa;
+  color: #888;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-  color: black;
+  color: var(--text);
+}
+
+/* ==============================
+   About Modal
+================================= */
+#about-modal .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+#about-modal .modal-content {
+  background-color: var(--light);
+  margin: 5% auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s ease;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text);
+  position: relative;
+}
+
+#about-modal .modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+#about-modal .modal-content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 6px;
+}
+
+#about-modal .modal-content:hover::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+}
+
+#about-modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+#about-modal .close-btn:hover {
+  color: var(--accent);
+}
+
+/* ==============================
+   Team Grid Layout
+================================= */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-items: center;
+  align-items: stretch;
+}
+
+.team-member {
+  width: 200px;
+  height: 240px;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.team-member:hover {
+  transform: scale(1.05);
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  margin-bottom: 10px;
+}
+
+.team-member h3 {
+  font-size: 14px;
+  margin: 5px 0;
+  color: var(--text);
+}
+
+.team-member p {
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.team-member a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 12px;
+  transition: color 0.3s ease;
+}
+
+.team-member a:hover {
+  color: var(--accent);
+}
+
+/* ==============================
+   Logo
+================================= */
+.logo-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 30px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  text-align: center;
+}
+
+.logo-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.logo-item span {
+  font-size: 13px;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .logo-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-item {
+    width: 70px;
+    margin-bottom: 10px;
+  }
+}
+
+/* ==============================
+   Instructions Modal
+================================= */
+#instructions-section .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+#instructions-section .modal-content {
+  background-color: var(--light);
+  margin: 5% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.4s ease;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text);
+}
+
+#instructions-section .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+#instructions-section .close-btn:hover {
+  color: var(--accent);
+}
+
+#instructions-section .instructions-section h2 {
+  margin-top: 0;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+#instructions-section .instructions-section p {
+  line-height: 1.6;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+#instructions-section .modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+#instructions-section .modal-content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 6px;
+}
+
+#instructions-section .modal-content:hover::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+}
+
+/* ==============================
+   Forms
+================================= */
+form input,
+form button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 form input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: var(--white);
+  color: var(--text);
 }
 
 form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
+  background-color: var(--primary);
   color: white;
+  font-weight: bold;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 form button:hover {
-  background-color: #45a049;
+  background-color: var(--hover-accent);
+}
+
+/* ==============================
+   Text Elements
+================================= */
+p {
+  font-size: 15px;
+  color: var(--text);
 }
 
 p span {
-  color: #4CAF50;
+  color: var(--accent);
   cursor: pointer;
   text-decoration: underline;
 }
 
-p {
-  font-size: 14px;
+/* ==============================
+   Dark Mode Support
+================================= */
+[data-theme='dark'] {
+  --background: #1a1a1a;
+  --text: #e0e0e0;
+  --primary: #3a5a40;
+  --accent: #a3b18a;
+  --light: #2c2c2c;
+  --white: #ddd;
 }
 
-body {
-  padding-top: 20px;
+[data-theme='dark'] body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+[data-theme='dark'] .modal-content {
+  background-color: #333;
+  color: var(--white);
+}
+
+[data-theme='dark'] form input {
+  background-color: #444;
+  color: white;
+}
+
+[data-theme='dark'] #instructions-section .modal-content {
+  background-color: #2c2c2c;
+  color: var(--white);
+}
+
+[data-theme='dark'] #instructions-section .close-btn {
+  color: #bbb;
+}
+
+[data-theme='dark'] #instructions-section .close-btn:hover {
+  color: var(--accent);
+}
+
+[data-theme='dark'] #about-modal .modal-content {
+  background-color: #2c2c2c;
+  color: var(--white);
+}
+
+[data-theme='dark'] #about-content .team-member {
+  background-color: #333;
+}
+
+[data-theme='dark'] #about-modal .close-btn {
+  color: #bbb;
+}
+
+[data-theme='dark'] #about-modal .close-btn:hover {
+  color: var(--accent);
+}
+
+[data-theme='dark'] #about-content .team-member a {
+  color: var(--accent);
+}
+
+[data-theme='dark'] .logo-item span {
+  color: var(--white);
+}
+
+[data-theme='dark'] .logo-item span,
+[data-theme='dark'] .team-member h3,
+[data-theme='dark'] .team-member p {
+  color: var(--white);
 }
