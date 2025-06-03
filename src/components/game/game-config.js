@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import WebFont from "webfontloader"
 
 import TitleScene from "./scenes/titleScene.js";
 import LoreScene from "./scenes/loreScene.js";
@@ -55,7 +56,14 @@ const config = {
 
 export const launchGame = () => {
   if (!gameInstance) {
-    gameInstance = new Phaser.Game(config);
+    WebFont.load({
+      google: {
+        families: ["VT323", "Press Start 2P", "Silkscreen"]
+      },
+      active: () => {
+        gameInstance = new Phaser.Game(config)
+      }
+    })
   }
 };
 
