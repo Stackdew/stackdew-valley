@@ -136,7 +136,9 @@ export default class DevlingSelection extends Phaser.Scene {
       .setDepth(3);
 
     //filtering
-    this.grownDevlings = database.filter((devling) => devling.isGrown === true);
+    this.grownDevlings = database.filter(
+      (devling) => devling.isGrown === true && devling.hasBattled === false
+    );
     this.currentDevlingIndex = 0;
 
     // this.grownDevlings = database.filter((devling) => devling.isGrown === true);
@@ -169,15 +171,12 @@ export default class DevlingSelection extends Phaser.Scene {
     //==PLAYER DEVLING CARD==
     this.add.image(centerX - 160, centerY + 50, "front").setScale(0.9);
 
-    this.enemyHead = new DevlingHead(
+    this.playerHead = new DevlingHead(
       this,
-      centerX + 205,
+      centerX - 155,
       centerY - 6,
-      this.enemyDevling
-    )
-      .setScale(2)
-      .setFlipX(true)
-      .setDepth(1);
+      this.playerDevling
+    ).setScale(2);
 
     //NAME
     this.playerCardName = this.playerDevling.name;
@@ -195,11 +194,20 @@ export default class DevlingSelection extends Phaser.Scene {
 
     //
     //==ENEMY DEVLING CARD==
-
     this.enemyCard = this.add
       .image(centerX + 210, centerY + 50, "enemyfront")
       .setScale(0.9)
       .setOrigin(0.5);
+
+    this.enemyHead = new DevlingHead(
+      this,
+      centerX + 205,
+      centerY - 6,
+      this.enemyDevling
+    )
+      .setScale(2)
+      .setFlipX(true)
+      .setDepth(1);
 
     // ENEMY NAME
 
@@ -238,6 +246,7 @@ export default class DevlingSelection extends Phaser.Scene {
 
     this.statKeys.forEach((stat, i) => {
       //NAME COLUMN
+
       const nameText = this.add.text(centerX / 2.4, statY, stat.toUpperCase(), {
         fontSize: "10px",
         fontFamily: '"Press Start 2P"',
@@ -296,6 +305,7 @@ export default class DevlingSelection extends Phaser.Scene {
 
     this.switchDevling = (direction) => {
       this.currentDevlingIndex += direction;
+      console.log(this.currentDevlingIndex);
       if (this.currentDevlingIndex < 0) {
         this.currentDevlingIndex = this.grownDevlings.length - 1;
       } else if (this.currentDevlingIndex >= this.grownDevlings.length) {

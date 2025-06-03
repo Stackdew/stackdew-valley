@@ -4,6 +4,7 @@ import DevlingHead from "../src/devlingHead";
 import Player from "../src/player";
 import DialogueManager from "../src/dialogueManager";
 import { userInventory } from "../src/dummydata";
+import { retiredInventory } from "../src/retiredInventory";
 
 export default class TrumpBattle extends Phaser.Scene {
   constructor() {
@@ -466,28 +467,14 @@ export default class TrumpBattle extends Phaser.Scene {
       if (player > enemy) {
         this.playerHead.playAnimation("win");
         this.enemyHead.playAnimation("lose");
-        //this.bigBoss.playAnimation('talk');
 
         result = `  ${this.playerDevling.name} wins!`;
-        // this.dialogue.startDialogue(
-        // 	[
-        // 		{
-        // 			text: `${this.devlingName} wins!`,
-        // 			speaker: '',
-        // 			color: '#1f451c',
-        // 		},
-        // 	],
-        // 	null,
-        // 	315,
-        // 	350
-        // );
 
         this.enemyLives--;
         this.shakeHealthBar(this.enemyHealthBar);
       } else if (player < enemy) {
         this.playerHead.playAnimation("lose");
         this.enemyHead.playAnimation("win");
-        // this.bigBoss.playAnimation("talk");
 
         result = `${this.enemyDevling.name} wins!`;
         this.playerLives--;
@@ -498,18 +485,6 @@ export default class TrumpBattle extends Phaser.Scene {
       const usedText = this.statTextList[this.currentStatIndex];
       usedText.name.setColor("gray").setTint(0x888888).setAlpha(0.5);
       usedText.lvl.setColor("gray").setTint(0x888888).setAlpha(0.5);
-
-      const resultText = "";
-      // this.add.text(
-      // 	this.cameras.main.centerX - 100,
-      // 	this.cameras.main.height - 100,
-      // 	`${stat.toUpperCase()} — ${result.toUpperCase()}`,
-      // 	{
-      // 		fontSize: '16px',
-      // 		fontFamily: 'Press Start 2P',
-      // 		fill: '#ffff00',
-      // 	}
-      // );
 
       this.dialogue.startDialogue(
         [
@@ -533,52 +508,6 @@ export default class TrumpBattle extends Phaser.Scene {
         playerDevlingWins === 2 ||
         enemyDevlingWins === 2 ||
         this.usedStats.length >= 3;
-
-      // if (gameOver) {
-      // 	this.time.delayedCall(2000, () => {
-      // 		resultText.setText(
-      // 			this.playerLives > this.enemyLives
-      // 				? `Your devling has been hired.`
-      // 				: `Mitch's devling has been hired`
-      // 		);
-
-      // if (gameOver) {
-      // 	this.time.delayedCall(2000, () => {
-      // 		resultText.setText(
-      // 			this.playerLives > this.enemyLives
-      // 				? this.dialogue.startDialogue(
-      // 						[
-      // 							{
-      // 								text: `Congratulations! ${this.playerDevling.name} has been hired!`,
-      // 								speaker: '',
-      // 								color: '#1f451c',
-      // 							},
-      // 						],
-      // 						null,
-      // 						200,
-      // 						350
-      // 				  )
-      // 				: this.dialogue.startDialogue(
-      // 						[
-      // 							{
-      // 								text: `Unfortunately, ${this.enemyDevling.name} has been hired!`,
-      // 								speaker: '',
-      // 								color: '#1f451c',
-      // 							},
-      // 						],
-      // 						null,
-      // 						200,
-      // 						350
-      // 				  )
-      // 		);
-      // 		this.time.delayedCall(2000, () => this.moveScene('overworldScene'));
-      // 	});
-      // } else {
-      // 	this.time.delayedCall(4000, () => {
-      // 		//resultText.destroy();
-      // 		this.flipCardBack(() => this.startNextRound());
-      // 	});
-      // }
 
       if (gameOver) {
         this.time.delayedCall(2500, () => {
@@ -765,18 +694,6 @@ export default class TrumpBattle extends Phaser.Scene {
     this.enemyHealthBar.setTexture(getHeathBarSprite(this.enemyLives));
   }
 
-  // transitionToNextScene() {
-  //   // Clear any existing objects and reload the spritesheets
-  //   this.scene.start("newScene"); // or use other transition logic
-
-  //   // Force reloading the sprite and animation by recreating them
-  //   this.scene.events.once("shutdown", () => {
-  //     // Clear the sprite or animation if necessary
-  //     this.playerHead.destroy();
-  //     this.enemyHead.destroy();
-  //   });
-  // }
-
   moveScene() {
     this.sound.stopAll();
     this.input.keyboard.enabled = false;
@@ -785,8 +702,6 @@ export default class TrumpBattle extends Phaser.Scene {
     this.time.delayedCall(1000, () => {
       this.scene.start("overworldScene", {
         from: "trumpScene",
-
-        // userInventory: this.userInventory,
       });
     });
   }

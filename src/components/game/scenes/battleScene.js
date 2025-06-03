@@ -33,6 +33,7 @@ export default class battleScene extends Phaser.Scene {
     this.load.audio("speechSound", "../assets/speechSound.wav");
     this.load.audio("footStepSound", "../assets/footStepSound.wav");
     this.load.audio("citySound", "../assets/cityweird.wav");
+    this.input.keyboard.enabled = true;
   }
 
   create() {
