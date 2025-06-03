@@ -1,4 +1,4 @@
-import { database } from "/src/dummydata.js";
+import { database } from "../src/dummydata.js";
 import { enemyDevlings } from "../src/enemyDevlingData";
 import DevlingHead from "../src/devlingHead";
 import Player from "../src/player";
