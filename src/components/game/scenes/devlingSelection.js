@@ -195,7 +195,6 @@ export default class DevlingSelection extends Phaser.Scene {
 
     //
     //==ENEMY DEVLING CARD==
-      
 
     this.enemyCard = this.add
       .image(centerX + 210, centerY + 50, "enemyfront")

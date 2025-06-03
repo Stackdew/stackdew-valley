@@ -14,7 +14,7 @@ import pauseScene from "../scenes/pauseScene.js";
 import trumpBattle from "../scenes/trumpScene.js";
 import dungeonScene from "../scenes/dungeonScene.js";
 import minigameSnake from "../scenes/minigameSnake.js";
-import devlingSelection from "../scenes/devlingSelection.js";
+import DevlingSelection from "../scenes/devlingSelection.js";
 
 export class mainScene extends Phaser.Scene {
   constructor() {
@@ -68,7 +68,7 @@ function startGame() {
       secondFloor,
       officeScene,
       ComputerScene,
-      devlingSelection,
+      DevlingSelection,
       battleScene,
       trumpBattle,
       battleCardScene,

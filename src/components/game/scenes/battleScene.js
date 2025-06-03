@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import dialogueManager from "../src/dialogueManager.js";
 import togglePause from "../src/togglePause.js";
-//import devlingSelection from '../scene/trumpScene.js';
+//import DevlingSelection from '../scene/trumpScene.js';
 
 export default class battleScene extends Phaser.Scene {
   constructor() {
