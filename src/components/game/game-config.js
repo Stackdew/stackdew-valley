@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 
-// import GameScene from './scenes/game-scene'
 import TitleScene from './scenes/titleScene.js'
 import LoreScene from './scenes/loreScene.js'
 import overworldScene from './scenes/overworld.js';
@@ -11,9 +10,7 @@ import farmScene from './scenes/farmScene.js';
 import computerScene from './scenes/computerScene.js';
 import officeScene from './scenes/officeScene.js';
 import battleScene from './scenes/battleScene.js';
-// import battleCardScene from './scenes/battleCards.js';
 import pauseScene from './scenes/pauseScene.js';
-// import trumpBattle from "./scenes/trumpScene.js";
 
 let gameInstance = null
 

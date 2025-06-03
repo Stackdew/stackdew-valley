@@ -13,8 +13,8 @@ import {
   collection,
   where,
 } from 'firebase/firestore'
-
 import { auth, db } from './firebase-init'
+
 import {
   launchGame,
   destroyGame,
@@ -62,7 +62,6 @@ export const createUser = async (username, password, confirmPassword) => {
 }
 
 export const loginUser = async (username, password) => {
- 
   try {
     const userSnapshot = await getDocs(
       query(collection(db, 'users'), where('username', '==', username))
@@ -72,7 +71,7 @@ export const loginUser = async (username, password) => {
       
       const email = userSnapshot.docs[0].data().email
       
-      await signInWithEmailAndPassword(auth, username, password)
+      await signInWithEmailAndPassword(auth, email, password)
   } catch (error) {
     throw new Error(`Login failed: ${error.message}`)
   }

@@ -1,10 +1,9 @@
 import './style.css'
-// import '../test.js'
 
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-
 import { auth } from './firebase/firebase-init'
 import { handleAuthStateChange } from './firebase/firebase-queries'
+
 import { initThemeSwitcher } from './components/mode-switch'
 import { setupAuthModal } from './components/auth'
 import { setupAboutModal } from './components/about'
