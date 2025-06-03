@@ -13,6 +13,7 @@ import battleScene from "./scenes/battleScene.js";
 import pauseScene from "./scenes/pauseScene.js";
 import DevlingSelection from "./scenes/devlingSelection.js";
 import TrumpBattle from "./scenes/trumpScene.js";
+import minigameSnake from "./scenes/minigameSnake.js";
 
 let gameInstance = null;
 
@@ -26,6 +27,7 @@ const config = {
     TitleScene,
     LoreScene,
     firstFloor,
+    minigameSnake,
     farmScene,
     overworldScene,
     preloadScene,
