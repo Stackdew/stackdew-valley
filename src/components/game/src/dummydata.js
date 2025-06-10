@@ -1,4 +1,4 @@
-const cohort = [];
+
 export const database = [
   {
     name: "James",
@@ -105,4 +105,4 @@ export const database = [
 
 export let userInventory = [];
 
-// module.exports = { database, cohort, userInventory };
+

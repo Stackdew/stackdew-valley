@@ -4,6 +4,7 @@ import DialogueManager from '../src/dialogueManager.js';
 import renderInventory from '../src/renderInventory.js';
 import togglePause from '../src/togglePause.js';
 import { database, userInventory } from '../src/dummydata.js';
+import { updateInventory } from '../../../firebase/firebase-queries.js';
 
 export default class FirstFloor extends Phaser.Scene {
 	constructor() {
@@ -250,7 +251,7 @@ export default class FirstFloor extends Phaser.Scene {
 			if (database.length > 0 && userInventory.length === 0) {
 				for (let i = 0; i < database.length; i++) {
 					const devling = database[i];
-					userInventory.push(devling);
+					//userInventory.push(devling);
 					this.renderInventory.render(userInventory);
 					// this.dialogue.startDialogue(
 					// 	[
@@ -340,6 +341,7 @@ export default class FirstFloor extends Phaser.Scene {
 
 	moveScene(target) {
 		this.input.keyboard.enabled = false;
+		updateInventory()
 		this.cameras.main.fadeOut(1000, 0, 0, 0);
 		this.time.delayedCall(1000, () => {
 			this.scene.start(target);

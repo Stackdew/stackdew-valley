@@ -6,6 +6,7 @@ import renderInventory from "../src/renderInventory.js";
 import farmScene from "../scenes/farmScene.js";
 import officeScene from "../scenes/officeScene.js";
 import { database, userInventory } from "../src/dummydata.js";
+import { updateInventory } from "../../../firebase/firebase-queries.js";
 
 export default class overworldScene extends Phaser.Scene {
   constructor() {
@@ -262,6 +263,7 @@ export default class overworldScene extends Phaser.Scene {
 
   moveScene(sceneKey) {
     this.input.keyboard.enabled = false;
+    updateInventory()
     this.cameras.main.fadeOut(500, 0, 0, 0);
     this.time.delayedCall(500, () => {
       this.scene.start(sceneKey);
@@ -270,6 +272,7 @@ export default class overworldScene extends Phaser.Scene {
 
   moveSceneNew(sceneKey) {
     this.input.keyboard.enabled = false;
+    updateInventory()
     this.cameras.main.fadeOut(500, 0, 0, 0);
     this.time.delayedCall(500, () => {
       this.scene.start(sceneKey, { from: "overworldScene" });

@@ -20,14 +20,15 @@ import {
   destroyGame,
   getGameInstance,
 } from '../components/game/game-config'
+import { userInventory } from '../components/game/src/dummydata'
 
-const createEmptyInventory = () => {
-  const inventory = {}
-  for (let i = 0; i < 6; i++) {
-    inventory[`slot${i}`] = { item: null }
-  }
-  return inventory
-}
+// const createEmptyInventory = () => {
+//   const inventory = {}
+//   for (let i = 0; i < 6; i++) {
+//     inventory[`slot${i}`] = { item: null }
+//   }
+//   return inventory
+// }
 
 export const createUser = async (username, password, confirmPassword) => {
   if (password !== confirmPassword) {
@@ -44,13 +45,13 @@ export const createUser = async (username, password, confirmPassword) => {
     )
     const user = userCredential.user
 
-    const emptyInventory = createEmptyInventory()
+    //const emptyInventory = createEmptyInventory()
 
     const userRef = doc(db, 'users', user.uid)
     await setDoc(userRef, {
       username,
       email: user.email,
-      inventory: emptyInventory,
+      inventory: userInventory,
       created_at: serverTimestamp(),
       last_login_at: serverTimestamp(),
       user_id: user.uid,
@@ -68,10 +69,18 @@ export const loginUser = async (username, password) => {
     )
     
     if (userSnapshot.empty) throw new Error('User not found!')
-      
       const email = userSnapshot.docs[0].data().email
       
       await signInWithEmailAndPassword(auth, email, password)
+      let latestData = await getCurrentUser()
+      console.log(latestData.inventory)
+      for (let i=0; i< latestData.inventory.length; i++){
+        
+        userInventory.push(latestData.inventory[i])
+      }
+      //userInventory = latestData.inventory
+      console.log(userInventory)
+  
   } catch (error) {
     throw new Error(`Login failed: ${error.message}`)
   }
@@ -102,6 +111,7 @@ export const handleAuthStateChange = async (user) => {
 
       if (userDocSnap.exists()) {
         const userData = userDocSnap.data()
+        
         userDisplay.textContent = `Logged in as: ${userData.username}`
       }
 
@@ -163,5 +173,20 @@ export const playerMovement = async (x, y) => {
   } catch (err) {
     console.error('Failed to update player position:', err)
   }
+}
+
+export const updateInventory = async () => {
+  const uid = auth.currentUser?.uid
+  if (!uid) return console.error('Not authenticated')
+
+  const userDocRef = doc(db, 'users', uid)
+  try {
+    await updateDoc(userDocRef, {
+      inventory: userInventory
+    })
+  } catch (err) {
+    console.error('Failed to update player inventory', err)
+  }
+
 }
 

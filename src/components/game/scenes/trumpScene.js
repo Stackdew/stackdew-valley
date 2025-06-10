@@ -5,6 +5,7 @@ import Player from "../src/player";
 import DialogueManager from "../src/dialogueManager";
 import { userInventory } from "../src/dummydata";
 import { retiredInventory } from "../src/retiredInventory";
+import { updateInventory } from "../../../firebase/firebase-queries.js";
 
 export default class TrumpBattle extends Phaser.Scene {
   constructor() {
@@ -698,6 +699,7 @@ export default class TrumpBattle extends Phaser.Scene {
   moveScene() {
     this.sound.stopAll();
     this.input.keyboard.enabled = false;
+    updateInventory()
     this.cameras.main.fadeOut(1000, 0, 0, 0);
 
     this.time.delayedCall(1000, () => {

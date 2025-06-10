@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { updateInventory } from "../../../firebase/firebase-queries";
 
 export default class preloadScene extends Phaser.Scene {
   constructor() {
@@ -29,6 +30,7 @@ export default class preloadScene extends Phaser.Scene {
   }
 
   moveScene() {
+    updateInventory()
     this.cameras.main.fadeOut(1000, 0, 0, 0);
     this.cameras.main.once("camerafadeoutcomplete", () => {
       this.scene.start("battleCardScene");
