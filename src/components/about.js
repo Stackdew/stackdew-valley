@@ -67,7 +67,6 @@ export const setupAboutModal = () => {
   </div>
 `
 
-
   document.body.insertAdjacentHTML('beforeend', modal)
 
   const aboutModal = document.getElementById('about-modal')

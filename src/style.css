@@ -467,8 +467,7 @@ p span {
 }
 
 [data-theme='dark'] body {
-  background-color: var(--background);
-  background-image: url('/background-skyscraper3.jpg');
+  background-image: var(--background-image);
   color: var(--text);
 }
 
