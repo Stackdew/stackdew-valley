@@ -37,7 +37,7 @@ export const setupAuthModal = () => {
             </div>
         </div>
     `
-
+    
   const app = document.getElementById('app')
   app.innerHTML += modal
 

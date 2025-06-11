@@ -22,14 +22,6 @@ import {
 } from '../components/game/game-config'
 import { userInventory } from '../components/game/src/dummydata'
 
-// const createEmptyInventory = () => {
-//   const inventory = {}
-//   for (let i = 0; i < 6; i++) {
-//     inventory[`slot${i}`] = { item: null }
-//   }
-//   return inventory
-// }
-
 export const createUser = async (username, password, confirmPassword) => {
   if (password !== confirmPassword) {
     throw new Error('Passwords do not match!')
@@ -44,8 +36,6 @@ export const createUser = async (username, password, confirmPassword) => {
       password
     )
     const user = userCredential.user
-
-    //const emptyInventory = createEmptyInventory()
 
     const userRef = doc(db, 'users', user.uid)
     await setDoc(userRef, {
@@ -73,12 +63,10 @@ export const loginUser = async (username, password) => {
       
       await signInWithEmailAndPassword(auth, email, password)
       let latestData = await getCurrentUser()
-      console.log(latestData.inventory)
       for (let i=0; i< latestData.inventory.length; i++){
         
         userInventory.push(latestData.inventory[i])
       }
-      //userInventory = latestData.inventory
       console.log(userInventory)
   
   } catch (error) {
