@@ -14,6 +14,7 @@ export const database = [
     isWatered: false,
     isGrown: false,
     hasBattled: false,
+    hasWon: null
   },
 
   {
@@ -30,6 +31,7 @@ export const database = [
     isWatered: false,
     isGrown: false,
     hasBattled: false,
+    hasWon: null
   },
   {
     name: "evie",
@@ -47,6 +49,7 @@ export const database = [
     isWatered: false,
     isGrown: false,
     hasBattled: false,
+    hasWon: null
   },
   {
     name: "Noah",
@@ -65,6 +68,7 @@ export const database = [
     isWatered: false,
     isGrown: false,
     hasBattled: false,
+    hasWon: null
   },
   {
     name: "penny",
@@ -83,6 +87,7 @@ export const database = [
     isWatered: false,
     isGrown: false,
     hasBattled: false,
+    hasWon: null
   },
   {
     name: "steve",
@@ -100,9 +105,12 @@ export const database = [
     isWatered: false,
     isGrown: false,
     hasBattled: false,
+    hasWon: null
   },
 ];
 
 export let userInventory = [];
+
+
 
 

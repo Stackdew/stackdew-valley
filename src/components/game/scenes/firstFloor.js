@@ -251,7 +251,7 @@ export default class FirstFloor extends Phaser.Scene {
 			if (database.length > 0 && userInventory.length === 0) {
 				for (let i = 0; i < database.length; i++) {
 					const devling = database[i];
-					//userInventory.push(devling);
+					userInventory.push(devling);
 					this.renderInventory.render(userInventory);
 					// this.dialogue.startDialogue(
 					// 	[

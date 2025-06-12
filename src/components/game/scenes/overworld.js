@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import Player from "../src/player.js";
 import DialogueManager from "../src/dialogueManager.js";
 import renderInventory from "../src/renderInventory.js";
-// import { userInventory } from "../src/dummydata.js";
 import farmScene from "../scenes/farmScene.js";
 import officeScene from "../scenes/officeScene.js";
 import { database, userInventory } from "../src/dummydata.js";

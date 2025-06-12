@@ -375,7 +375,7 @@ export default class farmScene extends Phaser.Scene {
 			}
 		}
 	}
-
+	
 	moveScene(sceneKey) {
 		this.input.keyboard.enabled = false;
 		updateInventory()
@@ -402,6 +402,7 @@ export default class farmScene extends Phaser.Scene {
 			this.isDialogueRunning = true;
 
 			const message = this.getScarecrowMessage();
+			console.log(userInventory[0].haswon);
 			console.log(message);
 			this.dialogue.startDialogue(
 				[

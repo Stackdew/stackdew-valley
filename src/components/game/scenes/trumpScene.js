@@ -5,7 +5,7 @@ import Player from "../src/player";
 import DialogueManager from "../src/dialogueManager";
 import { userInventory } from "../src/dummydata";
 import { retiredInventory } from "../src/retiredInventory";
-import { updateInventory } from "../../../firebase/firebase-queries.js";
+import { updateInventory, updateRetiredInventory } from "../../../firebase/firebase-queries.js";
 
 export default class TrumpBattle extends Phaser.Scene {
   constructor() {
@@ -515,6 +515,14 @@ export default class TrumpBattle extends Phaser.Scene {
         this.time.delayedCall(2500, () => {
           if (this.playerLives > this.enemyLives) {
             const announceName = this.playerDevling.name.toUpperCase();
+
+            //new code to change hasWon status:
+            // const userIndex = userInventory.findIndex(
+            // (devling) => devling.name === this.playerDevling.name)
+            // userInventory[userIndex].hasWon = true
+            // const announceName = this.playerDevling.name.toUpperCase();
+            /////---End
+
             this.dialogue.startDialogue(
               [
                 {
@@ -700,6 +708,7 @@ export default class TrumpBattle extends Phaser.Scene {
     this.sound.stopAll();
     this.input.keyboard.enabled = false;
     updateInventory()
+    updateRetiredInventory()
     this.cameras.main.fadeOut(1000, 0, 0, 0);
 
     this.time.delayedCall(1000, () => {

@@ -21,6 +21,7 @@ import {
   getGameInstance,
 } from '../components/game/game-config'
 import { userInventory } from '../components/game/src/dummydata'
+import { retiredInventory } from '../components/game/src/retiredInventory'
 
 export const createUser = async (username, password, confirmPassword) => {
   if (password !== confirmPassword) {
@@ -42,6 +43,7 @@ export const createUser = async (username, password, confirmPassword) => {
       username,
       email: user.email,
       inventory: userInventory,
+      retiredInventory: [],
       created_at: serverTimestamp(),
       last_login_at: serverTimestamp(),
       user_id: user.uid,
@@ -171,6 +173,21 @@ export const updateInventory = async () => {
   try {
     await updateDoc(userDocRef, {
       inventory: userInventory
+    })
+  } catch (err) {
+    console.error('Failed to update player inventory', err)
+  }
+
+}
+
+export const updateRetiredInventory = async () => {
+  const uid = auth.currentUser?.uid
+  if (!uid) return console.error('Not authenticated')
+
+  const userDocRef = doc(db, 'users', uid)
+  try {
+    await updateDoc(userDocRef, {
+      retiredInventory: retiredInventory
     })
   } catch (err) {
     console.error('Failed to update player inventory', err)
