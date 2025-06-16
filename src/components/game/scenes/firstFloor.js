@@ -52,6 +52,7 @@ export default class FirstFloor extends Phaser.Scene {
 		//initialise render inventory
 		this.renderInventory = new renderInventory(this);
 		this.renderInventory.render(userInventory);
+		console.log('user inv', userInventory);
 
 		//create audio
 		this.harvestingSound = this.sound.add('harvestingSound');
@@ -341,10 +342,10 @@ export default class FirstFloor extends Phaser.Scene {
 
 	moveScene(target) {
 		this.input.keyboard.enabled = false;
-		updateInventory()
+		updateInventory();
 		this.cameras.main.fadeOut(1000, 0, 0, 0);
 		this.time.delayedCall(1000, () => {
-			this.scene.start(target);
+			this.scene.start(target, { from: 'firstFloor' });
 			this.input.keyboard.enabled = true;
 		});
 	}

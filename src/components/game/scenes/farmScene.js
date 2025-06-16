@@ -186,7 +186,7 @@ export default class farmScene extends Phaser.Scene {
 		//handle passing score from snake minigame back to farmScene
 		this.events.on('wake', () => {
 			this.isDialogueRunning = false;
-			if (!this.weedsEatenFromBySnake) {
+			if (this.weedsEatenBySnake) {
 				console.log(
 					'Returning from snake game with weeds eaten:',
 					this.weedsEatenBySnake
@@ -375,10 +375,10 @@ export default class farmScene extends Phaser.Scene {
 			}
 		}
 	}
-	
+
 	moveScene(sceneKey) {
 		this.input.keyboard.enabled = false;
-		updateInventory()
+		updateInventory();
 		this.cameras.main.fadeOut(500, 0, 0, 0);
 		this.time.delayedCall(500, () => {
 			this.scene.start(sceneKey);
@@ -387,7 +387,7 @@ export default class farmScene extends Phaser.Scene {
 
 	moveSceneToOverworld(sceneKey) {
 		this.input.keyboard.enabled = false;
-		updateInventory()
+		updateInventory();
 		this.cameras.main.fadeOut(500, 0, 0, 0);
 		this.time.delayedCall(500, () => {
 			this.scene.start(sceneKey, { from: 'farmScene' });
@@ -500,6 +500,7 @@ export default class farmScene extends Phaser.Scene {
 						20
 					);
 				} else {
+					this.isDialogueRunning = true;
 					this.dialogue.startDialogue(
 						[
 							{

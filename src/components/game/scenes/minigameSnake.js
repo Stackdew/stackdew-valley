@@ -828,7 +828,7 @@ export default class minigameSnake extends Phaser.Scene {
 
 			//initialise text
 			const deathText = this.add
-				.text(400, 224, 'YOU DIED.', {
+				.text(400, 224, 'YOU DIED (press Space).', {
 					fontFamily: 'VT323',
 					fontSize: '32px',
 					color: '#ff0000',

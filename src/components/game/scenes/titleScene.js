@@ -9,7 +9,6 @@ export default class TitleScene extends Phaser.Scene {
 	preload() {}
 
 	create() {
-		
 		this.cameras.main.setBackgroundColor('#000000');
 		this.cameras.main.fadeOut(0);
 
@@ -110,11 +109,11 @@ export default class TitleScene extends Phaser.Scene {
 			.setOrigin(0.5);
 
 		this.input.keyboard.on('keydown-SPACE', () => {
-			if(userInventory.length > 0) {
-			this.scene.start('firstFloor');
-		} else{
-			this.scene.start('loreScene');
-		}
+			if (userInventory.length > 0) {
+				this.scene.start('firstFloor');
+			} else {
+				this.scene.start('loreScene');
+			}
 		});
 	}
 }
