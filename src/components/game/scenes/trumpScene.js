@@ -61,6 +61,7 @@ export default class TrumpBattle extends Phaser.Scene {
 	}
 
 	init(data) {
+		console.log(data)
 		this.playerDevling = data.playerDevling;
 		console.log(this.playerDevling);
 	}
@@ -160,8 +161,8 @@ export default class TrumpBattle extends Phaser.Scene {
 		this.isFlipping = false;
 
 		//==CHOSEN PLAYER & ENEMY DEVLING
-		let i = Math.round(Math.random() * 4) - 1;
-		this.enemyDevling = enemyDevlings[2];
+		let i = Math.round(Math.random() * 4);
+		this.enemyDevling = enemyDevlings[i-1];
 		console.log('i= ', i);
 		// this.playerDevling = database.find(
 		//   (devling) => devling.name === this.playerDevling.name
@@ -461,7 +462,24 @@ export default class TrumpBattle extends Phaser.Scene {
 	compareStatValues() {
 		const stat = this.statKeys[this.currentStatIndex];
 		if (this.usedStats.includes(stat)) return this.sound.play('error');
-
+		
+		//
+		// this.isDialogueRunning = true;
+		// this.dialogue.startDialogue(
+		// 		[
+		// 			{
+		// 				text: `Show me your ${stat} skills devlings!`,
+		// 				speaker: '',
+		// 				color: '#1f451c',
+		// 			},
+		// 		],
+		// 		null,
+		// 		300,
+		// 		350
+		// 	)
+		// this.isDialogueRunning = false;
+		//
+		
 		this.sound.play('select');
 		this.usedStats.push(stat);
 		this.isRoundActive = true;
@@ -558,7 +576,7 @@ export default class TrumpBattle extends Phaser.Scene {
 						const userIndex = retiredInventory.findIndex(
 							(devling) => devling.name === this.playerDevling.name
 						);
-						retiredInventory[userIndex].hasWon = true;
+						retiredInventory[userIndex].hasWon = false;
 					}
 
 					this.time.delayedCall(2000, () => this.moveScene('overworldScene'));

@@ -69,14 +69,29 @@ export default class DevlingSelection extends Phaser.Scene {
 			loop: true,
 			volume: 0.2,
 		});
+		
+		this.isDialogueRunning = true
+		this.dialogue.startDialogue(
+				[
+					{
+						text: `Use arrow keys to cycle through devlings and enter to select`,
+						speaker: '',
+						color: '#1f451c',
+					},
+				],
+				null,
+				200,
+				350
+			)
+		this.isDialogueRunning = false
 
 		const cam = this.cameras.main;
 		const centerX = cam.centerX;
 		const centerY = cam.centerY;
 
 		//==CHOSEN PLAYER & ENEMY DEVLING
-		let i = Math.round(Math.random() * 4) - 1;
-		this.enemyDevling = enemyDevlings[i];
+		let i = Math.round(Math.random() * 4);
+		this.enemyDevling = enemyDevlings[i-1];
 		console.log('i= ', i);
 
 		this.anims.create({

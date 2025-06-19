@@ -43,11 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('click', async (e) => {
 	if (e.target.id === 'logout-btn') {
 		try {
-			await signOut(auth);
-			document.getElementById('user-display').textContent = '';
 			for (let i = 0; i < 6; i++) {
 				userInventory.pop();
+				console.log(userInventory, "from Main")
 			}
+			await signOut(auth);
+			document.getElementById('user-display').textContent = '';
 
 			console.log('popped inventory = ', userInventory);
 			alert('Successfully logged out');
