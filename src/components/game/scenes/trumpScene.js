@@ -410,7 +410,7 @@ export default class TrumpBattle extends Phaser.Scene {
 			fill: color,
 		};
 	}
-
+	
 	showRoundTransition(imageKey, soundKey) {
 		const centerX = this.cameras.main.centerX;
 		const centerY = this.cameras.main.centerY;
@@ -464,22 +464,23 @@ export default class TrumpBattle extends Phaser.Scene {
 		if (this.usedStats.includes(stat)) return this.sound.play('error');
 		
 		//
-		// this.isDialogueRunning = true;
-		// this.dialogue.startDialogue(
-		// 		[
-		// 			{
-		// 				text: `Show me your ${stat} skills devlings!`,
-		// 				speaker: '',
-		// 				color: '#1f451c',
-		// 			},
-		// 		],
-		// 		null,
-		// 		300,
-		// 		350
-		// 	)
-		// this.isDialogueRunning = false;
+		this.isDialogueRunning = true;
+		this.dialogue.startDialogue(
+				[
+					{
+						text: `Show me your ${stat} skills devlings!`,
+						speaker: 'left',
+						color: '#1f451c',
+					},
+				],
+				null,
+				450,
+				10
+			)
+		this.isDialogueRunning = false;
 		//
 		
+		this.time.delayedCall(2000, () => {
 		this.sound.play('select');
 		this.usedStats.push(stat);
 		this.isRoundActive = true;
@@ -587,7 +588,9 @@ export default class TrumpBattle extends Phaser.Scene {
 				});
 			}
 		});
-	}
+		//
+	}) 
+ 	}
 
 	shakeHealthBar(bar) {
 		this.tweens.add({

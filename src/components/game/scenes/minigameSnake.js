@@ -74,7 +74,7 @@ export default class minigameSnake extends Phaser.Scene {
 					y: 20,
 				},
 				{
-					text: `Be a good Snek and eat up all of the tasty weeds. Nom. Nom. Nom.`,
+					text: `Be a good Snek and eat up all of the tasty weeds. Nom. Nom. Nom. The more weeds you eat, the more knowledge your devlings will gain.`,
 					speaker: '',
 					color: '#1f451c',
 					x: 200,

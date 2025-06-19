@@ -37,6 +37,7 @@ export default class battleScene extends Phaser.Scene {
   }
 
   create() {
+
     //draw map
     this.add.image(0, 0, "jobApproach").setOrigin(0, 0);
 
