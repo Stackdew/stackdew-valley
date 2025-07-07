@@ -464,7 +464,7 @@ export default class TrumpBattle extends Phaser.Scene {
 		if (this.usedStats.includes(stat)) return this.sound.play('error');
 		
 		//
-		this.isDialogueRunning = true;
+		// this.isDialogueRunning = true;
 		this.dialogue.startDialogue(
 				[
 					{
@@ -473,11 +473,11 @@ export default class TrumpBattle extends Phaser.Scene {
 						color: '#1f451c',
 					},
 				],
-				null,
+				() => {this.isDialogueRunning = false;},
 				450,
 				10
 			)
-		this.isDialogueRunning = false;
+		this.isDialogueRunning = true;
 		//
 		
 		this.time.delayedCall(2000, () => {
