@@ -161,8 +161,8 @@ export default class TrumpBattle extends Phaser.Scene {
 		this.isFlipping = false;
 
 		//==CHOSEN PLAYER & ENEMY DEVLING
-		let i = Math.round(Math.random() * 4);
-		this.enemyDevling = enemyDevlings[i-1];
+		let i = Math.round(Math.random() * enemyDevlings.length);
+		this.enemyDevling = enemyDevlings[i];
 		console.log('i= ', i);
 		// this.playerDevling = database.find(
 		//   (devling) => devling.name === this.playerDevling.name
