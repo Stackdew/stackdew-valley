@@ -18,14 +18,14 @@ export default class overworldScene extends Phaser.Scene {
 
 		//Where we spawn when coming FROM these locations
 		const spawnPoints = {
-			farmScene: { x: 200, y: 220 },
-			officeScene: { x: 490, y: 130 },
-			battleScene: { x: 200, y: 275 },
-			dungeonScene: { x: 500, y: 320 },
+			farmScene: { x: 300, y: 234 },
+			officeScene: { x: 425, y: 145 },
+			battleScene: { x: 280, y: 215 },
+			dungeonScene: { x: 450, y: 200 },
 			trumpScene: { x: 200, y: 275 },
 		};
 
-		const spawn = spawnPoints[this.from] || { x: 275, y: 300 };
+		const spawn = spawnPoints[this.from] || { x: 300, y: 234 };
 		this.spawnX = spawn.x;
 		this.spawnY = spawn.y;
 	}
@@ -35,7 +35,7 @@ export default class overworldScene extends Phaser.Scene {
 		// this.load.image('mapImage', '../assets/1_Terrains_32x32.png');
 
 		// this.load.tilemapTiledJSON('map', '../assets/overworldsophie.json');
-		this.load.image('mapImage', '../assets/overworldsophienew.png');
+		this.load.image('mapImage', '../assets/newoverworldmap.png');
 
 		this.load.spritesheet('playerSheet', '../assets/rose.png', {
 			frameWidth: 64,
@@ -64,28 +64,29 @@ export default class overworldScene extends Phaser.Scene {
 		// this.locationLayer.setCollisionByProperty({ collide: true });
 
 		//create new map
+
 		this.add.image(400, 221, 'mapImage');
 
 		//create hidden trigger sprite for farm scene
-		this.farmTrigger = this.physics.add.sprite(200, 150, null);
+		this.farmTrigger = this.physics.add.sprite(190, 320, null);
 		this.farmTrigger.setSize(125, 80);
 		this.farmTrigger.setVisible(false);
 		this.farmTriggered = false;
 
 		//create hidden trigger for job arena scene
-		this.arenaTrigger = this.physics.add.sprite(150, 350, null);
-		this.arenaTrigger.setSize(150, 60);
+		this.arenaTrigger = this.physics.add.sprite(210, 175, null);
+		this.arenaTrigger.setSize(160, 80);
 		this.arenaTrigger.setVisible(false);
 		this.arenaTriggered = false;
 
 		//create hidden trigger for job market scene
-		this.jobMarketTrigger = this.physics.add.sprite(450, 70, null);
+		this.jobMarketTrigger = this.physics.add.sprite(490, 90, null);
 		this.jobMarketTrigger.setSize(150, 100);
 		this.jobMarketTrigger.setVisible(false);
 		this.jobMarketTriggered = false;
 
 		//create hidden trigger for tech dungeon
-		this.dungeonTrigger = this.physics.add.sprite(550, 375, null);
+		this.dungeonTrigger = this.physics.add.sprite(480, 305, null);
 		this.dungeonTrigger.setSize(150, 100);
 		this.dungeonTrigger.setVisible(false);
 		this.dungeonTriggered = false;
@@ -122,7 +123,7 @@ export default class overworldScene extends Phaser.Scene {
 			this.dialogue.startDialogue(
 				[
 					{
-						text: 'Harvested Devlings need to be taken South West to the ...',
+						text: 'Harvested Devlings need to be taken North West to the ...',
 						speaker: '',
 						color: '#1f451c',
 						x: 200,
@@ -136,7 +137,7 @@ export default class overworldScene extends Phaser.Scene {
 						y: 350,
 					},
 					{
-						text: 'The StackDew Valley Farm is to the North West.',
+						text: 'The StackDew Valley Farm is to the South West.',
 						speaker: '',
 						color: '#1f451c',
 						x: 200,
